@@ -24,6 +24,8 @@ class APIHandler {
           print("error with response status: \(status)")
 
           completionHandler(nil, false)
+          return
+          
         default:
           print("\(endpoint.path) + \(String(describing: endpoint.parameters)) success")
         }
@@ -31,8 +33,10 @@ class APIHandler {
       if let result = response.result.value {
         let json = JSON(result)
         completionHandler(json, true)
+        return
       } else {
         completionHandler(nil, false)
+        return
       }
     }
   }
